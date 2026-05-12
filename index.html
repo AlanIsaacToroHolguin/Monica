@@ -465,60 +465,6 @@
     .media-band .logo-item img:hover { filter: grayscale(40%) opacity(0.95); }
     .media-band .logo-item span { font-size: 0.9rem; }
 
-    /* =============================================
-       FEATURED RECOGNITION (Bloomberg Línea)
-    ============================================= */
-    .featured-recognition {
-      background: var(--white);
-      padding: 56px 0;
-      border-top: 1px solid var(--white-gray);
-      border-bottom: 1px solid var(--white-gray);
-    }
-    .recognition-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-    .recognition-badge {
-      width: 88px;
-      height: 88px;
-      flex-shrink: 0;
-      object-fit: contain;
-    }
-    .recognition-text {
-      display: flex;
-      flex-direction: column;
-      max-width: 460px;
-    }
-    .recognition-eyebrow {
-      font-weight: 700;
-      font-size: 0.6rem;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 8px;
-    }
-    .recognition-name {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: clamp(1.1rem, 1.7vw, 1.4rem);
-      color: var(--daintree);
-      line-height: 1.3;
-    }
-    .recognition-source {
-      font-weight: 600;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      color: var(--kashmir);
-      margin-top: 6px;
-      text-transform: uppercase;
-    }
-    @media (max-width: 680px) {
-      .recognition-row { flex-direction: column; text-align: center; gap: 18px; }
-      .recognition-badge { width: 72px; height: 72px; }
-    }
 
     /* =============================================
        HOME — SPEAKING CARDS
@@ -1054,42 +1000,133 @@
     }
 
     /* =============================================
-       STATS STRIP
+       AWARDS ROW (static, with hover popup cards)
     ============================================= */
-    .stats-strip {
-      background: var(--daintree);
-      padding: 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+    .awards-row {
+      background: var(--white);
+      padding: 48px 0;
+      border-top: 1px solid var(--white-gray);
+      border-bottom: 1px solid var(--white-gray);
+      position: relative;
+      z-index: 5;
     }
-    .stats-row {
+    .awards-inner {
       display: flex;
-      align-items: stretch;
+      align-items: center;
       justify-content: center;
+      gap: 64px;
       flex-wrap: wrap;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 32px;
     }
-    .stat {
-      text-align: center;
-      padding: 32px 52px;
-      border-right: 1px solid rgba(255,255,255,0.1);
+    .award-item {
+      position: relative;
+      cursor: pointer;
+      outline: none;
     }
-    .stat:last-child { border-right: none; }
-    .stat-num {
+    .award-thumb {
+      height: 76px;
+      width: auto;
+      max-width: 150px;
+      object-fit: contain;
+      opacity: 0.85;
+      transition: opacity 0.22s ease, transform 0.22s ease;
       display: block;
+    }
+    .award-item:hover .award-thumb,
+    .award-item:focus-visible .award-thumb {
+      opacity: 1;
+      transform: translateY(-3px);
+    }
+
+    /* Popup card */
+    .award-popup {
+      position: absolute;
+      top: calc(100% + 18px);
+      left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      background: var(--white);
+      box-shadow: 0 20px 60px rgba(15,37,51,0.18);
+      border: 1px solid var(--white-gray);
+      padding: 22px 26px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      width: 380px;
+      max-width: 92vw;
+      z-index: 60;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+    }
+    .award-popup::before {
+      content: '';
+      position: absolute;
+      top: -7px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 13px;
+      height: 13px;
+      background: var(--white);
+      border-top: 1px solid var(--white-gray);
+      border-left: 1px solid var(--white-gray);
+    }
+    .award-item:hover .award-popup,
+    .award-item:focus-within .award-popup,
+    .award-item:focus-visible .award-popup {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
+    .award-popup-badge {
+      width: 64px;
+      height: 64px;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+    .award-popup-text {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      min-width: 0;
+    }
+    .award-popup-eyebrow {
+      font-weight: 700;
+      font-size: 0.58rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 8px;
+    }
+    .award-popup-name {
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-size: clamp(1.5rem, 2.8vw, 2rem);
-      color: var(--white);
-      line-height: 1.1;
-      margin-bottom: 6px;
+      font-size: 1.05rem;
+      line-height: 1.3;
+      color: var(--daintree);
     }
-    .stat-label {
-      display: block;
+    .award-popup-source {
       font-weight: 600;
-      font-size: 0.58rem;
-      letter-spacing: 0.18em;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.42);
+      color: var(--kashmir);
+      margin-top: 6px;
     }
+
+    /* Edge-aware popup positioning (prevent off-screen clipping) */
+    .award-item.edge-left  .award-popup { left: 0;  transform: translateX(0)   translateY(-6px); }
+    .award-item.edge-left:hover .award-popup,
+    .award-item.edge-left:focus-within .award-popup { transform: translateX(0) translateY(0); }
+    .award-item.edge-left  .award-popup::before { left: 38px; }
+
+    .award-item.edge-right .award-popup { left: auto; right: 0; transform: translateX(0) translateY(-6px); }
+    .award-item.edge-right:hover .award-popup,
+    .award-item.edge-right:focus-within .award-popup { transform: translateX(0) translateY(0); }
+    .award-item.edge-right .award-popup::before { left: auto; right: 38px; }
 
     /* =============================================
        CHAPTER REVERSE — proper order, no rtl hack
@@ -1177,9 +1214,12 @@
       .form-row     { grid-template-columns: 1fr; }
       .hero         { min-height: 80vh; align-items: flex-end; }
       .hero-ctas    { flex-direction: column; align-items: flex-start; }
-      .container    { padding: 0 20px; }
-      .stat         { padding: 24px 28px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); width: 50%; }
-      .stat:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.08); }
+      .container          { padding: 0 20px; }
+      .awards-inner       { gap: 28px; }
+      .award-thumb        { height: 52px; max-width: 100px; }
+      .award-popup        { width: calc(100vw - 40px); padding: 18px 20px; gap: 16px; }
+      .award-popup-badge  { width: 52px; height: 52px; }
+      .award-popup-name   { font-size: 0.95rem; }
     }
   </style>
 </head>
@@ -1229,7 +1269,7 @@
   <!-- Hero -->
   <section class="hero" aria-label="Monica Hernandez — keynote speaker">
     <div class="hero-bg" id="hero-home-bg">
-      <div class="hero-bg-placeholder img-placeholder">Monica in EAFIT.jpg</div>
+      <div class="hero-bg-placeholder img-placeholder">Monica HeadshotBackground.jpg</div>
     </div>
     <div class="hero-overlay" aria-hidden="true"></div>
     <div class="container">
@@ -1245,27 +1285,82 @@
     </div>
   </section>
 
-  <!-- Stats Strip -->
-  <section class="stats-strip" aria-label="Monica Hernandez key credentials">
-    <div class="container">
-      <div class="stats-row">
-        <div class="stat">
-          <span class="stat-num">20+</span>
-          <span class="stat-label">Years in Enterprise Technology</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">Fortune 500</span>
-          <span class="stat-label">Clients Served</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">Top 100</span>
-          <span class="stat-label">Hispanics in Technology · Bloomberg Línea</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">Forbes</span>
-          <span class="stat-label">Technology Council Member since 2021</span>
+  <!-- Awards Row (static, with hover popup cards) -->
+  <section class="awards-row" aria-label="Awards and recognition">
+    <div class="awards-inner">
+
+      <div class="award-item edge-left" tabindex="0">
+        <img class="award-thumb" src="Images/Monica's%20awards/Bloomberg-Linea-square-1.png" alt="Bloomberg Línea — 100 Most Influential Latinos">
+        <div class="award-popup" role="tooltip">
+          <img class="award-popup-badge" src="Images/Monica's%20awards/Bloomberg-Linea-square-1.png" alt="">
+          <div class="award-popup-text">
+            <span class="award-popup-eyebrow">Featured Recognition</span>
+            <span class="award-popup-name">100 Most Influential Latinos in Technology</span>
+            <span class="award-popup-source">Bloomberg Línea</span>
+          </div>
         </div>
       </div>
+
+      <div class="award-item" tabindex="0">
+        <img class="award-thumb" src="Images/Monica's%20awards/EnterprisingWomen.png" alt="Enterprising Women of the Year">
+        <div class="award-popup" role="tooltip">
+          <img class="award-popup-badge" src="Images/Monica's%20awards/EnterprisingWomen.png" alt="">
+          <div class="award-popup-text">
+            <span class="award-popup-eyebrow">Award</span>
+            <span class="award-popup-name">Enterprising Women of the Year</span>
+            <span class="award-popup-source">Enterprising Women Magazine</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="award-item" tabindex="0">
+        <img class="award-thumb" src="Images/Monica's%20awards/EY-Entrepeneurial-Winning-Women.png" alt="EY Entrepreneurial Winning Women">
+        <div class="award-popup" role="tooltip">
+          <img class="award-popup-badge" src="Images/Monica's%20awards/EY-Entrepeneurial-Winning-Women.png" alt="">
+          <div class="award-popup-text">
+            <span class="award-popup-eyebrow">Award</span>
+            <span class="award-popup-name">EY Entrepreneurial Winning Women&trade;</span>
+            <span class="award-popup-source">North America Class of 2021</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="award-item" tabindex="0">
+        <img class="award-thumb" src="Images/Monica's%20awards/HITEC100.png" alt="HITEC 100 Awardee">
+        <div class="award-popup" role="tooltip">
+          <img class="award-popup-badge" src="Images/Monica's%20awards/HITEC100.png" alt="">
+          <div class="award-popup-text">
+            <span class="award-popup-eyebrow">Honoree</span>
+            <span class="award-popup-name">HITEC 100 Awardee</span>
+            <span class="award-popup-source">U.S. &amp; Global</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="award-item" tabindex="0">
+        <img class="award-thumb" src="Images/Monica's%20awards/women2watch-jp-morgan-002%20(1).png" alt="Women 2 Watch — JPMorgan Chase">
+        <div class="award-popup" role="tooltip">
+          <img class="award-popup-badge" src="Images/Monica's%20awards/women2watch-jp-morgan-002%20(1).png" alt="">
+          <div class="award-popup-text">
+            <span class="award-popup-eyebrow">Recognition</span>
+            <span class="award-popup-name">Women 2 Watch</span>
+            <span class="award-popup-source">JPMorgan Chase</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="award-item edge-right" tabindex="0">
+        <img class="award-thumb" src="Images/Monica's%20awards/Forbes%20(1).png" alt="Forbes Technology Council">
+        <div class="award-popup" role="tooltip">
+          <img class="award-popup-badge" src="Images/Monica's%20awards/Forbes%20(1).png" alt="">
+          <div class="award-popup-text">
+            <span class="award-popup-eyebrow">Member Since 2021</span>
+            <span class="award-popup-name">Forbes Technology Council</span>
+            <span class="award-popup-source">Invite-Only Tech Leadership Community</span>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1286,23 +1381,6 @@
             alt="Monica Hernandez, Founder and CEO of MAS Global"
             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="img-placeholder" style="display:none;aspect-ratio:3/4;">Monica.jpg</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured Recognition -->
-  <section class="featured-recognition" aria-label="Featured recognition">
-    <div class="container">
-      <div class="recognition-row fade-in">
-        <img class="recognition-badge"
-             src="Images/Monica's%20awards/Bloomberg-Linea-square-1.png"
-             alt="Bloomberg Línea — 100 Most Influential Latinos badge"
-             onerror="this.style.display='none'">
-        <div class="recognition-text">
-          <span class="recognition-eyebrow">Featured Recognition</span>
-          <span class="recognition-name">100 Most Influential Latinos in Technology</span>
-          <span class="recognition-source">Bloomberg Línea</span>
         </div>
       </div>
     </div>
@@ -2002,7 +2080,7 @@ function loadHeroBg(elementId, src) {
   img.src = src;
 }
 
-loadHeroBg('hero-home-bg',     'Images/Fotos%20Monica/Monica%20in%20EAFIT.jpg');
+loadHeroBg('hero-home-bg',     'Images/Enterprise%20and%20event%20logos/Monica%20HeadshotBackground.jpg');
 loadHeroBg('hero-speaking-bg', 'Images/Fotos%20Monica/Canada%20WPO%20Speaking.jpeg');
 
 /* =====================================================
