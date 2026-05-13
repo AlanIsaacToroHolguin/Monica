@@ -1,0 +1,43 @@
+---
+export interface Props {
+  current?: 'home' | 'speaking' | 'about' | 'podcast' | 'book';
+}
+const { current = 'home' } = Astro.props;
+
+const links = [
+  { href: '/', key: 'home', label: 'Home' },
+  { href: '/speaking', key: 'speaking', label: 'Speaking' },
+  { href: '/about', key: 'about', label: 'About Monica' },
+  { href: '/podcast', key: 'podcast', label: 'MAS Impact Podcast' }
+] as const;
+---
+
+<header id="site-header">
+  <div class="container">
+    <div class="header-inner">
+
+      <a class="logo" href="/" aria-label="Monica Hernandez — Home">
+        Monica Hernandez
+        <span>Founder &amp; CEO, MAS Global</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Main navigation">
+        {links.map((l) => (
+          <a class={`nav-link${current === l.key ? ' active' : ''}`} href={l.href}>{l.label}</a>
+        ))}
+        <a class={`nav-link btn btn-red${current === 'book' ? ' active' : ''}`} href="/book">Book Monica</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    {links.map((l) => (
+      <a class="nav-link" href={l.href}>{l.label}</a>
+    ))}
+    <a class="nav-link btn-red" href="/book">Book Monica</a>
+  </div>
+</header>

@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Book Monica — Speaking Inquiry"
+  description="Inquire about booking Monica Hernandez for your event."
+  current="book"
+>
+
+  <section class="book-opening" aria-labelledby="book-h1">
+    <div class="container">
+      <div class="book-header-grid fade-in">
+        <div>
+          <div class="eyebrow" style="margin-bottom: 20px;"><span class="eyebrow-text">Speaking Inquiry</span></div>
+          <h1 id="book-h1">Let's make<br />it happen.</h1>
+        </div>
+        <p class="book-intro-text">Tell us about your event. Monica's team works with you to design a session that fits your audience, your goals, and your format.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="book-layout">
+
+      <aside class="book-aside fade-in" aria-label="Event organizer testimonial">
+        <div class="book-testimonial">
+          <blockquote>"Working with Monica's team was seamless from start to finish. She arrived prepared, engaged our leadership team in a way no one else has, and left a lasting impression."</blockquote>
+          <p class="t-author">— [Event Organizer Name]<br />[Title], [Organization]</p>
+        </div>
+      </aside>
+
+      <div class="form-section fade-in">
+        <h2>Tell us about your event.</h2>
+
+        <form
+          id="booking-form"
+          action="https://formspree.io/f/YOUR_FORMSPREE_FORM_ID"
+          method="POST"
+          novalidate
+          aria-label="Speaking inquiry form">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="first-name">First Name<span class="req" aria-hidden="true"> *</span></label>
+              <input type="text" id="first-name" name="first_name" required autocomplete="given-name" placeholder="Jane" />
+            </div>
+            <div class="form-group">
+              <label for="last-name">Last Name<span class="req" aria-hidden="true"> *</span></label>
+              <input type="text" id="last-name" name="last_name" required autocomplete="family-name" placeholder="Smith" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="f-email">Email<span class="req" aria-hidden="true"> *</span></label>
+              <input type="email" id="f-email" name="email" required autocomplete="email" placeholder="jane@company.com" />
+            </div>
+            <div class="form-group">
+              <label for="f-phone">Phone</label>
+              <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="+1 (555) 000-0000" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="f-interest">I'm Interested In<span class="req" aria-hidden="true"> *</span></label>
+            <select id="f-interest" name="interest" required>
+              <option value="" disabled selected>Select an option</option>
+              <option value="keynote">Keynote Speaking</option>
+              <option value="workshop">Workshop or Breakout Session</option>
+              <option value="panel">Panel Moderation</option>
+              <option value="podcast">Podcast or Media Appearance</option>
+              <option value="partnership">Partnership or Collaboration</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="f-referral">How Did You Hear About Monica?</label>
+            <select id="f-referral" name="referral">
+              <option value="" disabled selected>Select an option</option>
+              <option value="linkedin">LinkedIn</option>
+              <option value="referral">Referral from a colleague</option>
+              <option value="forbes">Forbes / Media</option>
+              <option value="conference">Conference or Event</option>
+              <option value="google">Google Search</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="f-message">Message / Notes</label>
+            <textarea id="f-message" name="message" placeholder="Tell us about your event, your audience, and what you hope attendees take away."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Would You Recommend Monica to Others?</label>
+            <div class="radio-group" role="group" aria-label="Would you recommend Monica?">
+              <label class="radio-label"><input type="radio" name="recommend" value="yes" /> Yes</label>
+              <label class="radio-label"><input type="radio" name="recommend" value="no" /> No</label>
+            </div>
+          </div>
+
+          <input type="hidden" name="_subject" value="New Speaking Inquiry — Monica Hernandez" />
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+          <button type="submit" class="btn btn-red btn-submit" id="submit-btn">Book Monica</button>
+
+          <div class="form-success" id="form-success" role="status" aria-live="polite"></div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+</Layout>

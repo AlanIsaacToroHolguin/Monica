@@ -1,0 +1,149 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  current?: 'home' | 'speaking' | 'about' | 'podcast' | 'book';
+}
+
+const {
+  title = 'Monica Hernandez — Keynote Speaker & CEO, MAS Global',
+  description = 'Monica Hernandez — Founder & CEO of MAS Global, Forbes Technology Council member, keynote speaker with 20+ years of enterprise technology leadership.',
+  current = 'home'
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <Header current={current} />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+
+  <script>
+    import Lenis from 'lenis';
+    import { gsap } from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Smooth scroll
+    const lenis = new Lenis({
+      duration: 1.1,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true
+    });
+
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+
+    // Header scroll state
+    const header = document.getElementById('site-header');
+    if (header) {
+      ScrollTrigger.create({
+        start: 'top -50',
+        onUpdate: (self) => {
+          header.classList.toggle('scrolled', self.scroll() > 50);
+        }
+      });
+    }
+
+    // Reveal animations on scroll
+    const revealEls = document.querySelectorAll('.fade-in, .reveal');
+    revealEls.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: el,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    });
+
+    // Stagger reveal for groups (children of .reveal-stagger)
+    const staggerGroups = document.querySelectorAll('.reveal-stagger');
+    staggerGroups.forEach((group) => {
+      gsap.fromTo(
+        group.children,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          stagger: 0.08,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: group,
+            start: 'top 80%',
+            toggleActions: 'play none none none'
+          }
+        }
+      );
+    });
+
+    // Animated counters for stat numbers
+    document.querySelectorAll<HTMLElement>('.stat-number[data-count]').forEach((el) => {
+      const target = parseFloat(el.dataset.count || '0');
+      const suffix = el.dataset.suffix || '';
+      const accent = el.dataset.accent || '';
+      const obj = { val: 0 };
+      gsap.to(obj, {
+        val: target,
+        duration: 1.8,
+        ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+        onUpdate: () => {
+          const n = Math.round(obj.val).toLocaleString('en-US');
+          el.innerHTML = `${n}${suffix ? `<span class="accent">${suffix}</span>` : ''}${accent ? `<span class="accent">${accent}</span>` : ''}`;
+        }
+      });
+    });
+
+    // Mobile nav toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener('click', () => {
+        const isOpen = hamburger.classList.toggle('open');
+        mobileNav.classList.toggle('open', isOpen);
+        mobileNav.style.display = isOpen ? 'block' : 'none';
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+        mobileNav.setAttribute('aria-hidden', String(!isOpen));
+      });
+
+      mobileNav.querySelectorAll('a').forEach((a) =>
+        a.addEventListener('click', () => {
+          hamburger.classList.remove('open');
+          mobileNav.classList.remove('open');
+          mobileNav.style.display = 'none';
+          hamburger.setAttribute('aria-expanded', 'false');
+          mobileNav.setAttribute('aria-hidden', 'true');
+        })
+      );
+    }
+  </script>
+</body>
+</html>
