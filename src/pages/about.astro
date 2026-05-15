@@ -242,34 +242,53 @@ import Layout from '../layouts/Layout.astro';
 
   <script>
     import Swiper from 'swiper';
-    import { Navigation, Keyboard, Mousewheel } from 'swiper/modules';
+    import { Navigation, Keyboard, Autoplay } from 'swiper/modules';
     import 'swiper/css';
 
-    const swiper = new Swiper('#monica-swiper', {
-      modules: [Navigation, Keyboard, Mousewheel],
-      slidesPerView: 'auto',
-      spaceBetween: 28,
-      centeredSlides: false,
-      grabCursor: true,
-      keyboard: { enabled: true },
-      mousewheel: { forceToAxis: true, sensitivity: 0.6 },
-      speed: 700,
-      navigation: {
-        nextEl: '#monica-next',
-        prevEl: '#monica-prev'
-      }
-    });
+    function initMonicaSwiper() {
+      const el = document.querySelector('#monica-swiper');
+      const nextBtn = document.getElementById('monica-next');
+      const prevBtn = document.getElementById('monica-prev');
+      if (!el) return;
 
-    const progress = document.getElementById('monica-progress');
-    const count = document.getElementById('monica-count');
-    const total = swiper.slides.length;
-    const updateUI = () => {
-      const pct = ((swiper.activeIndex + 1) / total) * 100;
-      if (progress) progress.style.width = `${pct}%`;
-      if (count) count.textContent = `${String(swiper.activeIndex + 1).padStart(2, '0')} / ${String(total).padStart(2, '0')}`;
-    };
-    swiper.on('slideChange', updateUI);
-    updateUI();
+      const swiper = new Swiper(el, {
+        modules: [Navigation, Keyboard, Autoplay],
+        slidesPerView: 'auto',
+        spaceBetween: 32,
+        centeredSlides: true,
+        grabCursor: true,
+        loop: true,
+        keyboard: { enabled: true },
+        speed: 700,
+        autoplay: {
+          delay: 4500,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true
+        }
+      });
+
+      // Bind navigation manually for reliability
+      if (nextBtn) nextBtn.addEventListener('click', () => swiper.slideNext());
+      if (prevBtn) prevBtn.addEventListener('click', () => swiper.slidePrev());
+
+      const progress = document.getElementById('monica-progress');
+      const count = document.getElementById('monica-count');
+      const real = el.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate)').length;
+      const updateUI = () => {
+        const idx = (swiper.realIndex ?? swiper.activeIndex) + 1;
+        const pct = (idx / real) * 100;
+        if (progress) progress.style.width = pct + '%';
+        if (count) count.textContent = String(idx).padStart(2, '0') + ' / ' + String(real).padStart(2, '0');
+      };
+      swiper.on('slideChange', updateUI);
+      updateUI();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMonicaSwiper);
+    } else {
+      initMonicaSwiper();
+    }
   </script>
 
 </Layout>

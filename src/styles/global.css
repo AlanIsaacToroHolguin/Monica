@@ -204,6 +204,9 @@
     }
 
     .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 0.82rem;
@@ -211,16 +214,31 @@
       color: var(--daintree);
       text-decoration: none;
       text-transform: uppercase;
-      line-height: 1.2;
+      line-height: 1.15;
       cursor: pointer;
     }
-    .logo span {
+    .logo-mark {
+      height: 40px;
+      width: auto;
       display: block;
-      font-weight: 300;
+      flex-shrink: 0;
+    }
+    .logo .logo-text {
+      display: inline-flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2px;
+    }
+    .logo .logo-sub {
+      font-weight: 400;
       font-size: 0.6rem;
       letter-spacing: 0.18em;
       color: var(--kashmir);
-      margin-top: 3px;
+      text-transform: uppercase;
+    }
+    @media (max-width: 540px) {
+      .logo-mark { height: 30px; }
+      .logo .logo-text { display: none; }
     }
 
     .desktop-nav {
@@ -2282,7 +2300,9 @@
     }
 
     /* =============================================
-       PHOTO CAROUSEL — "Monica in Action"
+       PHOTO CAROUSEL — "Monica in Action" (v2 reworked)
+       Single large 16:9 slide, container-bound,
+       editorial peek of adjacent on desktop.
     ============================================= */
     .gallery-section {
       padding: 120px 0;
@@ -2292,54 +2312,70 @@
       max-width: var(--max-w);
       margin: 0 auto 56px;
       padding: 0 32px;
+      text-align: center;
     }
+    .gallery-header .eyebrow {
+      justify-content: center;
+    }
+    .gallery-header .eyebrow::before { display: none; }
     .gallery-header h2 {
       font-size: clamp(2rem, 4vw, 3rem);
       max-width: 720px;
+      margin: 0 auto;
     }
     .swiper.monica-swiper {
-      padding: 20px 0 60px;
+      padding: 20px 0;
       overflow: visible;
     }
     .monica-swiper .swiper-slide {
-      width: 480px;
-      max-width: 80vw;
-      height: 580px;
+      width: 880px;
+      max-width: calc(100vw - 80px);
+      aspect-ratio: 16 / 9;
       position: relative;
       overflow: hidden;
-      border-radius: 6px;
-      box-shadow: 0 20px 50px -25px rgba(15,37,51,0.4);
-      transition: transform 0.5s, box-shadow 0.5s;
+      border-radius: 8px;
+      box-shadow: 0 30px 60px -28px rgba(15,37,51,0.35);
+      opacity: 0.4;
+      transform: scale(0.94);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
-    .monica-swiper .swiper-slide:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 30px 60px -25px rgba(15,37,51,0.5);
+    .monica-swiper .swiper-slide-active {
+      opacity: 1;
+      transform: scale(1);
     }
     .monica-swiper .swiper-slide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center;
       display: block;
     }
     .monica-swiper .slide-caption {
       position: absolute;
-      left: 24px;
-      bottom: 24px;
-      right: 24px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 32px 40px;
       color: #fff;
       font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 1.15rem;
-      line-height: 1.3;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+      font-style: normal;
+      font-weight: 700;
+      font-size: clamp(1.1rem, 2vw, 1.6rem);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
       z-index: 2;
     }
     .monica-swiper .swiper-slide::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.7) 100%);
+      background: linear-gradient(180deg, transparent 55%, rgba(15,37,51,0.85) 100%);
       pointer-events: none;
+    }
+    @media (max-width: 720px) {
+      .monica-swiper { max-width: calc(100vw - 32px); }
+      .monica-swiper .swiper-slide { aspect-ratio: 4 / 5; }
+      .monica-swiper .slide-caption { padding: 22px 24px; }
     }
     .swiper-nav {
       max-width: var(--max-w);
@@ -2690,6 +2726,88 @@
     }
 
     /* =============================================
+       MONICA AS A GUEST — appearance card
+    ============================================= */
+    .guest-appearances {
+      padding: 110px 0;
+    }
+    .appearance-card {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid #ececec;
+      box-shadow: 0 12px 36px -16px rgba(15,37,51,0.12);
+      transition: transform 0.35s, box-shadow 0.35s;
+      text-decoration: none;
+      color: inherit;
+      margin-top: 40px;
+    }
+    .appearance-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 24px 50px -18px rgba(15,37,51,0.2);
+    }
+    .appearance-thumb {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: var(--ink);
+      overflow: hidden;
+    }
+    .appearance-thumb iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .appearance-body {
+      padding: 40px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+    }
+    .appearance-body .show-kicker {
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+    .appearance-body h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-style: normal;
+      text-transform: none;
+      letter-spacing: -0.01em;
+      font-size: clamp(1.25rem, 2.2vw, 1.7rem);
+      line-height: 1.2;
+      color: var(--ink);
+    }
+    .appearance-body .show-host {
+      font-size: 0.9rem;
+      color: var(--ink-muted);
+    }
+    .appearance-body .show-cta {
+      margin-top: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .appearance-body .show-cta svg { width: 14px; height: 14px; }
+    @media (max-width: 760px) {
+      .appearance-card { grid-template-columns: 1fr; }
+      .appearance-body { padding: 28px 24px; }
+    }
+
+    /* =============================================
        FEATURED ARTICLES SECTION
     ============================================= */
     .articles-section {
@@ -2710,8 +2828,8 @@
     }
     .articles-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
     }
     .article-card {
       display: flex;
@@ -2769,9 +2887,110 @@
       transition: color 0.22s;
     }
     .article-card:hover h3 { color: var(--red); }
-    @media (max-width: 980px) {
+    @media (max-width: 760px) {
       .articles-grid { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 540px) {
+    @media (max-width: 480px) {
       .articles-grid { grid-template-columns: 1fr; }
+    }
+
+    /* =============================================
+       WORDS BY MONICA — editorial list (her bylines)
+    ============================================= */
+    .words-section {
+      padding: 130px 0;
+      background: #fafaf9 !important;
+    }
+    .words-header {
+      max-width: 720px;
+      margin: 0 auto 56px;
+      text-align: center;
+    }
+    .words-header h2 { margin-bottom: 16px; }
+    .words-header p { color: var(--ink-soft); font-size: 1.05rem; }
+    .words-list {
+      max-width: 920px;
+      margin: 0 auto;
+      border-top: 1px solid #e6e3dd;
+    }
+    .word-row {
+      display: grid;
+      grid-template-columns: 130px 1fr auto;
+      gap: 40px;
+      align-items: center;
+      padding: 28px 0;
+      border-bottom: 1px solid #e6e3dd;
+      text-decoration: none;
+      color: inherit;
+      transition: padding 0.3s, background 0.3s;
+    }
+    .word-row:hover {
+      padding-left: 16px;
+      padding-right: 16px;
+      background: rgba(255,255,255,0.6);
+    }
+    .word-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .word-year {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 1.6rem;
+      color: var(--red);
+      line-height: 1;
+    }
+    .word-pub {
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+    .word-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-style: normal;
+      font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      transition: color 0.22s;
+    }
+    .word-row:hover .word-title { color: var(--red); }
+    .word-arrow {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid #d8d4cc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+      transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.25s;
+    }
+    .word-row:hover .word-arrow {
+      background: var(--red);
+      color: #fff;
+      border-color: var(--red);
+      transform: translateX(4px);
+    }
+    .word-arrow svg { width: 14px; height: 14px; }
+    .word-tag {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+    @media (max-width: 720px) {
+      .word-row { grid-template-columns: 1fr; gap: 8px; padding: 24px 0; }
+      .word-row:hover { padding-left: 0; padding-right: 0; }
+      .word-meta { flex-direction: row; align-items: baseline; gap: 12px; }
+      .word-year { font-size: 1.2rem; }
+      .word-arrow { display: none; }
     }
