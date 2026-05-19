@@ -34,6 +34,12 @@ const {
   </main>
   <Footer />
 
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M18 15l-6-6-6 6"/>
+    </svg>
+  </button>
+
   <script>
     import Lenis from 'lenis';
     import { gsap } from 'gsap';
@@ -52,14 +58,21 @@ const {
     gsap.ticker.add((time) => lenis.raf(time * 1000));
     gsap.ticker.lagSmoothing(0);
 
-    // Header scroll state
+    // Header scroll state + back-to-top visibility
     const header = document.getElementById('site-header');
-    if (header) {
-      ScrollTrigger.create({
-        start: 'top -50',
-        onUpdate: (self) => {
-          header.classList.toggle('scrolled', self.scroll() > 50);
-        }
+    const backToTop = document.getElementById('back-to-top');
+    ScrollTrigger.create({
+      start: 'top -50',
+      onUpdate: (self) => {
+        const y = self.scroll();
+        if (header) header.classList.toggle('scrolled', y > 50);
+        if (backToTop) backToTop.classList.toggle('is-visible', y > 600);
+      }
+    });
+
+    if (backToTop) {
+      backToTop.addEventListener('click', () => {
+        lenis.scrollTo(0, { duration: 1.2 });
       });
     }
 
