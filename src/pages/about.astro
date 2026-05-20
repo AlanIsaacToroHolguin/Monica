@@ -8,111 +8,108 @@ import Layout from '../layouts/Layout.astro';
   current="about"
 >
 
-  <header class="page-header" aria-labelledby="about-h1">
-    <div class="container fade-in">
-      <div class="page-header-inner">
-        <div>
-          <div class="eyebrow" style="margin-bottom: 20px;"><span class="eyebrow-text">About Monica</span></div>
-          <h1 id="about-h1">Built from<br />the inside out.</h1>
-        </div>
-        <p class="page-subheadline">Monica's story is the foundation of everything she teaches — and the reason her audience knows she's telling the truth.</p>
-      </div>
-    </div>
-  </header>
-
-  <section class="chapter" aria-labelledby="ch1-h2">
+  <!-- Hero -->
+  <section class="about-hero fade-in" aria-labelledby="about-h1">
     <div class="container">
-      <div class="chapter-inner fade-in">
-        <div class="chapter-text">
+      <div class="eyebrow"><span class="eyebrow-text">About Monica</span></div>
+      <h1 id="about-h1">My story to become <span class="more-accent">MORE…</span></h1>
+      <p class="about-sub">From a software engineering student in Medellín to Founder &amp; CEO of MAS Global — a journey of reinvention, resilience, and giving back.</p>
+    </div>
+  </section>
+
+  <!-- MORE sticky ticker -->
+  <nav class="more-ticker" aria-label="Chapter navigation">
+    <button type="button" class="letter-dot active" data-letter="M" aria-label="Jump to chapter M — Medellín">M</button>
+    <button type="button" class="letter-dot" data-letter="O" aria-label="Jump to chapter O — Oracle">O</button>
+    <button type="button" class="letter-dot" data-letter="R" aria-label="Jump to chapter R — Roots & Reinvestment">R</button>
+    <button type="button" class="letter-dot" data-letter="E" aria-label="Jump to chapter E — Empowerment">E</button>
+  </nav>
+
+  <!-- M — Medellín -->
+  <section class="more-chapter" data-letter="M" aria-labelledby="more-m-h2">
+    <div class="more-letter-bg" aria-hidden="true">M</div>
+    <div class="container">
+      <div class="more-chapter-grid fade-in">
+        <div class="more-chapter-text">
           <div class="chapter-meta">
-            <div class="chapter-num-display" aria-hidden="true">01</div>
-            <span class="chapter-label">Medellín, Colombia</span>
+            <span class="chapter-letter">M</span>
+            <span class="chapter-kicker">Medellín, Colombia</span>
           </div>
-          <h2 id="ch1-h2">Where it<br />started.</h2>
-          <p>Medellín, Colombia. A full academic scholarship to study software engineering — the opportunity that would change everything.</p>
+          <h2 id="more-m-h2">Path to software engineering &amp; the U.S.</h2>
+          <p>Born and raised in Medellín, Colombia. Monica earned a full academic scholarship to study software engineering at EAFIT — the opportunity that would change everything.</p>
+          <p>That single scholarship became the seed of a 20-year journey that would take her from a classroom in Antioquia to enterprise tech projects across Europe and the United States.</p>
         </div>
-        <div class="chapter-visual">
+        <div class="more-chapter-visual">
           <img src="/Images/Fotos%20Monica/Monica%20Oficina%20Medellin.jpg" alt="Monica Hernandez en Medellín, Colombia" />
         </div>
       </div>
     </div>
   </section>
 
-  <section class="chapter" aria-labelledby="ch2-h2">
+  <!-- O — Oracle -->
+  <section class="more-chapter" data-letter="O" aria-labelledby="more-o-h2">
+    <div class="more-letter-bg" aria-hidden="true">O</div>
     <div class="container">
-      <div class="chapter-inner reverse fade-in">
-        <div class="chapter-text">
+      <div class="more-chapter-grid reverse fade-in">
+        <div class="more-chapter-text">
           <div class="chapter-meta">
-            <div class="chapter-num-display" aria-hidden="true">02</div>
-            <span class="chapter-label">The Move</span>
+            <span class="chapter-letter">O</span>
+            <span class="chapter-kicker">Oracle Consulting</span>
           </div>
-          <h2 id="ch2-h2">Texas to the<br />Fortune 500.</h2>
-          <p>At 21, Monica landed in the U.S. and started building. IT projects in Texas. Then Oracle — consulting across Europe and the U.S. for enterprise clients.</p>
-          <p>20+ years learning how the largest organizations actually think, decide, and build.</p>
+          <h2 id="more-o-h2">Out of my comfort zone in corporate America.</h2>
+          <p>At 21, Monica landed in the United States. She built her IT career in Texas, then joined Oracle as a consultant — traveling across the U.S. and Europe leading enterprise-scale technology projects for Fortune 500 clients.</p>
+          <p>20+ years learning, from the inside, how the world's largest organizations actually think, decide, and build.</p>
         </div>
-        <div class="chapter-visual">
+        <div class="more-chapter-visual">
           <img src="/Images/Fotos%20Monica/Monica%20in%20Oracle.jpg" alt="Monica Hernandez during her years at Oracle" />
         </div>
       </div>
     </div>
   </section>
 
-  <section class="chapter" aria-labelledby="ch3-h2">
+  <!-- R — Roots / MAS Global -->
+  <section class="more-chapter" data-letter="R" aria-labelledby="more-r-h2">
+    <div class="more-letter-bg" aria-hidden="true">R</div>
     <div class="container">
-      <div class="chapter-inner fade-in">
-        <div class="chapter-text">
+      <div class="more-chapter-grid fade-in">
+        <div class="more-chapter-text">
           <div class="chapter-meta">
-            <div class="chapter-num-display" aria-hidden="true">03</div>
-            <span class="chapter-label">MAS Global · 2013</span>
+            <span class="chapter-letter">R</span>
+            <span class="chapter-kicker">Roots &amp; Reinvestment · MAS Global</span>
           </div>
-          <h2 id="ch3-h2">A company built<br />on a belief.</h2>
-          <p>Elite talent exists everywhere. Enterprise deserves access to it.</p>
-          <p>In 2013, Monica founded MAS Global on that idea. Today it serves Fortune 500 brands and connects U.S. enterprise to top tech talent across Latin America.</p>
+          <h2 id="more-r-h2">A company built on a belief — and a scholarship that gave back.</h2>
+          <p>In 2013, Monica founded MAS Global on a simple idea: elite talent exists everywhere, and enterprise deserves access to it. Today MAS Global serves Fortune 500 brands, connecting U.S. companies with top tech talent across Latin America.</p>
+          <p>The scholarship that changed her life at 18 now bears her company's name. The <strong>MAS Global–EAFIT Scholarship</strong> gives the next generation of Colombian engineers the same opportunity — and fuels U.S. tech teams with world-class talent. Her story, full circle.</p>
         </div>
-        <div class="chapter-logo-wrap">
-          <img src="/Images/LOGOS%20MAS%20GLOBAL%20-%20MAS%20IMPACT/LOGO%20MAS%20GLOBAL%20AZUL.png" alt="MAS Global logo" />
+        <div class="more-chapter-visual">
+          <img src="/Images/Fotos%20Monica/Monica%20award%20in%20EAFIT.jpg" alt="Monica Hernandez at EAFIT University, where her scholarship was born" />
         </div>
       </div>
     </div>
   </section>
 
-  <section class="chapter" aria-labelledby="ch4-h2">
+  <!-- E — Empowerment -->
+  <section class="more-chapter" data-letter="E" aria-labelledby="more-e-h2">
+    <div class="more-letter-bg" aria-hidden="true">E</div>
     <div class="container">
-      <div class="chapter-inner reverse fade-in">
-        <div class="chapter-text">
+      <div class="more-chapter-grid reverse fade-in">
+        <div class="more-chapter-text">
           <div class="chapter-meta">
-            <div class="chapter-num-display" aria-hidden="true">04</div>
-            <span class="chapter-label">The Scholarship</span>
+            <span class="chapter-letter">E</span>
+            <span class="chapter-kicker">Empowerment · Beyond the Company</span>
           </div>
-          <h2 id="ch4-h2">Her story,<br />full circle.</h2>
-          <p>The scholarship that changed her life at 18 now bears her company's name.</p>
-          <p>The MAS Global–EAFIT Scholarship gives the next generation of Colombian engineers the same opportunity — and fuels U.S. tech teams with world-class talent.</p>
+          <h2 id="more-e-h2">Platform. Podcast. Purpose.</h2>
+          <p>Host of the <strong>MAS Impact Podcast</strong>, where Monica sits down with the leaders shaping AI, enterprise tech, and inclusive growth.</p>
+          <p>Founder of the <strong>MAS Future Foundation</strong>, dedicated to upskilling the next generation of women and Latinos entering the technology industry. Forbes Technology Council member. Bloomberg Línea's 100 Most Influential Latinos in Tech.</p>
         </div>
-        <div class="chapter-visual">
-          <img src="/Images/Fotos%20Monica/Monica%20award%20in%20EAFIT.jpg" alt="Monica Hernandez receiving recognition at EAFIT University" />
+        <div class="more-chapter-visual">
+          <img src="/Images/Fotos%20Monica/Monicas%20miling.png" alt="Monica Hernandez — Founder & CEO, MAS Global" />
         </div>
       </div>
     </div>
   </section>
 
-  <section class="chapter" aria-labelledby="ch5-h2">
-    <div class="container">
-      <div class="chapter-inner fade-in">
-        <div class="chapter-text">
-          <div class="chapter-meta">
-            <div class="chapter-num-display" aria-hidden="true">05</div>
-            <span class="chapter-label">Beyond the Company</span>
-          </div>
-          <h2 id="ch5-h2">Platform.<br />Podcast. Purpose.</h2>
-          <p>Host of the MAS Impact Podcast. Founder of the MAS Future Foundation — upskilling the next generation of women and Latinos in tech.</p>
-        </div>
-        <div class="chapter-logos-wrap">
-          <img src="/Images/LOGOS%20MAS%20GLOBAL%20-%20MAS%20IMPACT/LOGO%20MAS%20IMPACT.png" alt="MAS Impact Podcast" />
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!-- Awards -->
   <section class="awards-section" aria-labelledby="awards-h2">
     <div class="container">
       <div class="eyebrow fade-in"><span class="eyebrow-text">Awards &amp; Honors</span></div>
@@ -163,77 +160,7 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <section class="orgs-band" aria-labelledby="orgs-h2">
-    <div class="container">
-      <div class="eyebrow eyebrow-center fade-in" style="margin-bottom: 16px;"><span class="eyebrow-text">Memberships &amp; Organizations</span></div>
-      <h2 id="orgs-h2" class="fade-in" style="text-align:center; margin-bottom: 48px;">Community &amp; Leadership</h2>
-      <div class="logo-row fade-in">
-        <div class="logo-item"><img src="/Images/Enterprise%20and%20event%20logos/YPO%20logo.jpg" alt="YPO" /></div>
-        <div class="logo-item"><img src="/Images/Enterprise%20and%20event%20logos/wbenc-logo.jpg" alt="WBENC" /></div>
-        <div class="logo-item"><img src="/Images/Enterprise%20and%20event%20logos/HITEC_logo.jpg" alt="HITEC" /></div>
-        <div class="logo-item"><img src="/Images/Enterprise%20and%20event%20logos/ey-logo.png" alt="EY Winning Women" /></div>
-        <div class="logo-item"><img src="/Images/Enterprise%20and%20event%20logos/NMSDC%20logo.png" alt="NMSDC" /></div>
-        <div class="logo-item"><img src="/Images/Enterprise%20and%20event%20logos/forbes-technology-council-logo.webp" alt="Forbes Technology Council" /></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Photo Carousel — Monica in Action -->
-  <section class="gallery-section" aria-labelledby="gallery-h2">
-    <div class="gallery-header fade-in">
-      <div class="eyebrow"><span class="eyebrow-text">Monica in Action</span></div>
-      <h2 id="gallery-h2">From stages and classrooms to boardrooms and broadcasts.</h2>
-    </div>
-
-    <div class="swiper monica-swiper" id="monica-swiper">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide">
-          <img src="/Images/Fotos%20Monica/Canada%20WPO%20Speaking.jpeg" alt="Monica speaking at WPO Canada" />
-          <div class="slide-caption">Keynote · WPO Canada</div>
-        </div>
-        <div class="swiper-slide">
-          <img src="/Images/Fotos%20Monica/Monica%20speaking%20Tampa%20Tech%20Week.jpg" alt="Monica speaking at Tampa Tech Week" />
-          <div class="slide-caption">Tampa Tech Week</div>
-        </div>
-        <div class="swiper-slide">
-          <img src="/Images/Fotos%20Monica/Conference%20WeConnect.JPG" alt="Monica at WeConnect International" />
-          <div class="slide-caption">WeConnect International</div>
-        </div>
-        <div class="swiper-slide">
-          <img src="/Images/Fotos%20Monica/Monica%20-%20how%20to%20successfully%20pitch.png" alt="Monica — How to Successfully Pitch" />
-          <div class="slide-caption">How to Successfully Pitch a Corporation</div>
-        </div>
-        <div class="swiper-slide">
-          <img src="/Images/Fotos%20Monica/Monica%20in%20EAFIT.jpg" alt="Monica at EAFIT University" />
-          <div class="slide-caption">EAFIT University · Medellín</div>
-        </div>
-        <div class="swiper-slide">
-          <img src="/Images/Fotos%20Monica/MOnica%20y%20Hitec.jpg" alt="Monica at HITEC" />
-          <div class="slide-caption">HITEC 100 · U.S. Hispanic Tech</div>
-        </div>
-        <div class="swiper-slide">
-          <img src="/Images/Fotos%20Monica/Monica%20in%20WeConnectInternational.PNG" alt="Monica at WeConnect International event" />
-          <div class="slide-caption">WeConnect International</div>
-        </div>
-        <div class="swiper-slide">
-          <img src="/Images/Fotos%20Monica/Monica%20Tampa%20Tech%20Week.jpg" alt="Monica at Tampa Tech Week" />
-          <div class="slide-caption">Tampa Tech Week</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="swiper-nav">
-      <button class="swiper-btn" id="monica-prev" aria-label="Previous photo">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-      <button class="swiper-btn" id="monica-next" aria-label="Next photo">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
-      </button>
-      <div class="swiper-progress"><div class="swiper-progress-bar" id="monica-progress"></div></div>
-      <div class="swiper-count" id="monica-count">01 / 08</div>
-    </div>
-  </section>
-
+  <!-- Closing -->
   <section class="closing-band" aria-label="About Monica personally">
     <div class="container fade-in">
       <p>Tampa, Florida. Two kids. One belief: technology's highest purpose is expanding access — to opportunity, to markets, to the rooms where decisions get made.</p>
@@ -241,53 +168,55 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <script>
-    import Swiper from 'swiper';
-    import { Navigation, Keyboard, Autoplay } from 'swiper/modules';
-    import 'swiper/css';
+    function initAbout() {
+      const dots = document.querySelectorAll('.more-ticker .letter-dot');
+      const chapters = document.querySelectorAll('.more-chapter');
 
-    function initMonicaSwiper() {
-      const el = document.querySelector('#monica-swiper');
-      const nextBtn = document.getElementById('monica-next');
-      const prevBtn = document.getElementById('monica-prev');
-      if (!el) return;
-
-      const swiper = new Swiper(el, {
-        modules: [Navigation, Keyboard, Autoplay],
-        slidesPerView: 'auto',
-        spaceBetween: 32,
-        centeredSlides: true,
-        grabCursor: true,
-        loop: true,
-        keyboard: { enabled: true },
-        speed: 700,
-        autoplay: {
-          delay: 4500,
-          disableOnInteraction: false,
-          pauseOnMouseEnter: true
-        }
-      });
-
-      // Bind navigation manually for reliability
-      if (nextBtn) nextBtn.addEventListener('click', () => swiper.slideNext());
-      if (prevBtn) prevBtn.addEventListener('click', () => swiper.slidePrev());
-
-      const progress = document.getElementById('monica-progress');
-      const count = document.getElementById('monica-count');
-      const real = el.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate)').length;
-      const updateUI = () => {
-        const idx = (swiper.realIndex ?? swiper.activeIndex) + 1;
-        const pct = (idx / real) * 100;
-        if (progress) progress.style.width = pct + '%';
-        if (count) count.textContent = String(idx).padStart(2, '0') + ' / ' + String(real).padStart(2, '0');
+      const setActive = (letter) => {
+        dots.forEach((d) => d.classList.toggle('active', d.dataset.letter === letter));
       };
-      swiper.on('slideChange', updateUI);
-      updateUI();
+
+      // Highlight active letter as user scrolls into chapter
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add('in-view');
+                const letter = e.target.dataset.letter;
+                if (letter) setActive(letter);
+              }
+            });
+          },
+          { rootMargin: '-40% 0px -40% 0px', threshold: 0 }
+        );
+        chapters.forEach((c) => io.observe(c));
+      }
+
+      // Click on a letter dot → smooth scroll to its chapter
+      const lenis = window.__lenis;
+      const header = document.getElementById('site-header');
+      const headerOffset = (header ? header.offsetHeight : 68) + 16;
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const letter = dot.dataset.letter;
+          const target = document.querySelector('.more-chapter[data-letter="' + letter + '"]');
+          if (!target) return;
+          const top = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+          if (lenis && typeof lenis.scrollTo === 'function') {
+            lenis.scrollTo(top, { duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+          } else {
+            window.scrollTo({ top, behavior: 'smooth' });
+          }
+        });
+      });
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initMonicaSwiper);
+      document.addEventListener('DOMContentLoaded', initAbout);
     } else {
-      initMonicaSwiper();
+      initAbout();
     }
   </script>
 

@@ -7,21 +7,40 @@ import Layout from '../layouts/Layout.astro';
   description="Keynotes, workshops and panels from Monica Hernandez — AI, leadership, and how to pitch a corporation."
   current="speaking"
 >
+<div class="speaking-page">
 
-  <!-- Hero -->
-  <section class="hero" aria-label="Monica Hernandez speaking on stage">
-    <div class="hero-bg" id="hero-speaking-bg" style="background-image:url('/Images/Fotos%20Monica/Canada%20WPO%20Speaking.jpeg');background-size:cover;background-position:center;"></div>
-    <div class="hero-overlay" aria-hidden="true"></div>
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-eyebrow"><span>20+ Years on the Front Lines</span></div>
-        <h1>Real experience.<br />Relevant insights.</h1>
-        <p class="hero-subheadline">A founder, a consultant, an immigrant. Monica speaks from inside enterprise — not around it.</p>
-        <div class="hero-ctas">
-          <a class="btn btn-red" href="/book" role="button">Book Monica</a>
-        </div>
+  <!-- Hero — full-bleed photo carousel that powers the page -->
+  <section class="speaking-hero-slider" aria-label="Monica on stage">
+    <div class="swiper" id="monica-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="/Images/Speaking/1.png" alt="Monica on stage" /></div>
+        <div class="swiper-slide"><img src="/Images/Speaking/2.png" alt="Monica on stage" /></div>
+        <div class="swiper-slide"><img src="/Images/Speaking/3.png" alt="Monica on stage" /></div>
+        <div class="swiper-slide"><img src="/Images/Speaking/4.png" alt="Monica on stage" /></div>
+        <div class="swiper-slide"><img src="/Images/Speaking/5.png" alt="Monica on stage" /></div>
       </div>
     </div>
+
+    <div class="speaking-hero-overlay">
+      <div class="container">
+        <div class="hero-eyebrow"><span>20+ Years on the Front Lines</span></div>
+        <h1>Real experience.<br />Relevant insights.</h1>
+        <p>A founder, a consultant, an immigrant. Monica speaks from inside enterprise — not around it.</p>
+        <a class="btn btn-red btn-pill" href="/book" role="button">Book Monica</a>
+      </div>
+    </div>
+
+    <div class="speaking-hero-controls">
+      <button class="swiper-btn" id="monica-prev" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="swiper-count"><span id="monica-current">01</span> / <span id="monica-total">05</span></div>
+      <button class="swiper-btn" id="monica-next" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+
+    <div class="speaking-hero-pagination" id="monica-pagination" aria-hidden="true"></div>
   </section>
 
   <!-- Who This Is For -->
@@ -111,5 +130,67 @@ import Layout from '../layouts/Layout.astro';
       </div>
     </div>
   </section>
+
+</div><!-- /.speaking-page -->
+
+<script>
+  import Swiper from 'swiper';
+  import { Navigation, Keyboard, Autoplay, EffectFade } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/effect-fade';
+
+  function initSpeakingSwiper() {
+    const el = document.querySelector('#monica-swiper');
+    const nextBtn = document.getElementById('monica-next');
+    const prevBtn = document.getElementById('monica-prev');
+    const pagination = document.getElementById('monica-pagination');
+    const current = document.getElementById('monica-current');
+    const total = document.getElementById('monica-total');
+    if (!el) return;
+
+    const swiper = new Swiper(el, {
+      modules: [Navigation, Keyboard, Autoplay, EffectFade],
+      slidesPerView: 1,
+      effect: 'fade',
+      fadeEffect: { crossFade: true },
+      grabCursor: true,
+      loop: true,
+      keyboard: { enabled: true },
+      speed: 800,
+      navigation: { nextEl: nextBtn, prevEl: prevBtn },
+      autoplay: { delay: 3000, disableOnInteraction: false }
+    });
+
+    const real = el.querySelectorAll('.swiper-slide:not(.swiper-slide-duplicate)').length;
+    if (total) total.textContent = String(real).padStart(2, '0');
+
+    // Build pagination dots
+    if (pagination) {
+      pagination.innerHTML = '';
+      for (let i = 0; i < real; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => swiper.slideToLoop(i));
+        pagination.appendChild(dot);
+      }
+    }
+
+    const update = () => {
+      const idx = (swiper.realIndex ?? swiper.activeIndex);
+      if (current) current.textContent = String(idx + 1).padStart(2, '0');
+      if (pagination) {
+        pagination.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    };
+    swiper.on('slideChange', update);
+    update();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSpeakingSwiper);
+  } else {
+    initSpeakingSwiper();
+  }
+</script>
 
 </Layout>
